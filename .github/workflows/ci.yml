@@ -1,0 +1,47 @@
+name: Integration Continue
+on:
+  push:
+    branches:
+    - cicd
+  pull_request:
+    branches:
+    - cicd
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js 17
+      use: actions/setup-node@v3
+      with:
+        node-version:17
+
+    - name: check lint
+      run: npm run lint
+  
+    - name: check dependencies
+      run: npm install
+    
+    - name: check lint
+      run: npm run lint
+
+    - name: some deps
+      run: npm install -g @vue/cli
+    
+    - name: leaflet
+      run: npm install leaflet
+
+    - name: Compiles and hot-reloads for development
+      run: npm run serve
+
+    - name: Compiles and minifies for production
+      run: npm run build
+
+ 
+
