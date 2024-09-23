@@ -22,10 +22,10 @@ jobs:
       with:
         node-version: 17
 
-    - name: some deps: vue
+    - name: some deps vue
       run: npm install -g @vue/cli
 
-    - name: some deps: leaflet
+    - name: some deps leaflet
       run: npm install leaflet
 
     - name: check lint
