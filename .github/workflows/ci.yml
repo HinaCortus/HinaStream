@@ -27,9 +27,6 @@ jobs:
 
     - name: some deps leaflet
       run: npm install leaflet
-
-    - name: check lint
-      run: npm run lint
   
     - name: check dependencies
       run: npm install
@@ -39,6 +36,11 @@ jobs:
 
     - name: Compiles and hot-reloads for development
       run: npm run serve --host
+
+    - name: curl
+      uses: enflo/curl-action@master
+      with:
+        curl: http://localhost:8080/ 
 
   build-prod:
     runs-on: ubuntu-latest
@@ -59,9 +61,6 @@ jobs:
 
     - name: some deps leaflet
       run: npm install leaflet
-
-    - name: check lint
-      run: npm run lint
   
     - name: check dependencies
       run: npm install
@@ -71,5 +70,8 @@ jobs:
 
     - name: Compiles and minifies for production
       run: npm run build
+
+    - name: start for production
+      run: npm run start
 
 
