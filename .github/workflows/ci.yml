@@ -38,7 +38,7 @@ jobs:
       run: npm run lint
 
     - name: Compiles and hot-reloads for development
-      run: npm run serve -- --host
+      run: npm run serve --host
 
   build-prod:
     runs-on: ubuntu-latest
