@@ -1,0 +1,85 @@
+name: Integration Continue
+on:
+  push:
+    branches:
+    - cicd
+  pull_request:
+    branches:
+    - cicd
+
+jobs:
+  build-dev:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js 17
+      uses: actions/setup-node@v3
+      with:
+        node-version: 17
+
+    - name: some deps vue
+      run: npm install -g @vue/cli
+
+    - name: some deps leaflet
+      run: npm install leaflet
+  
+    - name: check dependencies
+      run: npm install
+    
+    - name: check lint
+      run: npm run lint
+
+    - name: Compiles and hot-reloads for development
+      run: npm run serve --host
+
+    - name: curl
+      uses: enflo/curl-action@master
+      with:
+        curl: http://localhost:8080/ 
+
+  curl-dev:
+    runs-on: ubuntu-latest
+    steps:
+    - name: curl
+      uses: enflo/curl-action@master
+      with:
+        curl: http://localhost:8080/ 
+        
+  build-prod:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js 17
+      uses: actions/setup-node@v3
+      with:
+        node-version: 17
+
+    - name: some deps vue
+      run: npm install -g @vue/cli
+
+    - name: some deps leaflet
+      run: npm install leaflet
+  
+    - name: check dependencies
+      run: npm install
+    
+    - name: check lint
+      run: npm run lint
+
+    - name: Compiles and minifies for production
+      run: npm run build
+
+    - name: start for production
+      run: npm run start
+
+
