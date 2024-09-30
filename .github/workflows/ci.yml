@@ -42,6 +42,14 @@ jobs:
       with:
         curl: http://localhost:8080/ 
 
+  curl-dev:
+    runs-on: ubuntu-latest
+    steps:
+    - name: curl
+      uses: enflo/curl-action@master
+      with:
+        curl: http://localhost:8080/ 
+        
   build-prod:
     runs-on: ubuntu-latest
     defaults:
